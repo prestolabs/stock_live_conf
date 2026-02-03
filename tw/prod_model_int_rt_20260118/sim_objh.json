@@ -1,0 +1,51 @@
+{
+  "name": "predefined2",
+  "no_dft": true,
+  "extra_params": {
+    "samplers": [
+      {
+        "name": "exec_model",
+        "cool_time_ms": 500,
+        "comparisons": [
+          "Datetime.hhmm >= 901",
+          "Datetime.hhmm < 1520",
+          "ExternalInfo.top2000 == 1",
+//          "KrxProdFeature.is_tight == 1",
+//          "KrxProdFeature.book_valid == 1",
+//          "KrxProdFeature.feature_available == 1"
+        ]
+      },
+    ],
+    "group_features": [
+      "GroupFeatureSungilshim"
+    ],
+    "features": [
+      {
+        "name": "LookupFeature",
+        "deps": ["GroupFeatureSungilshim"],
+        "config_obj": {
+        }
+      },
+      {
+        "name": "KrxProdFeature",
+        "deps": ["{symbolid}.ExternalInfo"],
+        "config_obj": {
+          "rate_upper_limit": 0.1,
+          "rate_lower_limit": -0.1,
+          "turnover_ratio_upper_limit": 1.0
+        }
+      },
+    ],
+    "group_ygens": {
+      "sides": [
+        "buy",
+      ],
+      "times": [
+        14400
+      ],
+      "types": [
+        "GroupTimeForward",
+      ],
+    }
+  }
+}

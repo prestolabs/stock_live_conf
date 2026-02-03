@@ -1,0 +1,485 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "lgb_models": [
+      {
+        "name": "tw_basis_no_weight_front_model_nt_8",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_no_weight_front_model_nt_8_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_no_weight_front_model_nt_8_merge-c5.so"
+          }
+        ]
+      },
+      {
+        "name": "tw_basis_no_weight_back_model_nt_8",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_no_weight_back_model_nt_8_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_no_weight_back_model_nt_8_merge-c5.so"
+          }
+        ]
+      },
+      {
+        "name": "tw_basis_bbo_pq_weighted_front_model_nt_8",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_bbo_pq_weighted_front_model_nt_8_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_bbo_pq_weighted_front_model_nt_8_merge-c5.so"
+          }
+        ]
+      },
+      {
+        "name": "tw_basis_bbo_pq_weighted_back_model_nt_8",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_bbo_pq_weighted_back_model_nt_8_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_int_rt_20260121/tw_basis_bbo_pq_weighted_back_model_nt_8_merge-c5.so"
+          }
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_sub_model": true,
+      "model_name": "tw_basis_bbo_pq_weighted_front_model_nt_8",
+      "model_type": "lgb",
+      "name": "buy_front_overnight_sub_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [],
+      "sampler": "all_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_sub_model": true,
+      "model_name": "tw_basis_bbo_pq_weighted_back_model_nt_8",
+      "model_type": "lgb",
+      "name": "buy_back_overnight_sub_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [],
+      "sampler": "all_model_sampler"
+    },
+    {
+      "change_only_cover": true,
+      "cooltime_in_ns": 25000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "exit_short_loss_cut_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "exit": {
+            "start_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_min_unit_order_size": true,
+      "use_one_side_book": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "short_buy_univ_out_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler",
+      "use_min_unit_order_size": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "long_sell_univ_out_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler",
+      "use_min_unit_order_size": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "tw_basis_no_weight_front_model_nt_8",
+      "model_type": "lgb",
+      "name": "buy_front_model_p",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 5.0209477983468265,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 28.615025535432377
+          }
+        }
+      ],
+      "sampler": "top_50_and_low_liq_morning_sampler",
+      "sub_models": [
+        {
+          "name": "buy_front_overnight_sub_model",
+          "threshold": 113.45426193288236,
+          "threshold_percentile": 0.75
+        }
+      ],
+      "use_min_unit_order_size": true,
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_basis_no_weight_front_model_nt_8",
+      "model_type": "lgb",
+      "name": "long_sell_front_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 5.0209477983468265,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 38.33094510919198
+          }
+        }
+      ],
+      "sampler": "low_liq_morning_sampler",
+      "use_min_unit_order_size": true,
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "tw_basis_no_weight_front_model_nt_8",
+      "model_type": "lgb",
+      "name": "sell_front_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 5.0209477983468265,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 38.33094510919198
+          }
+        }
+      ],
+      "return_sampler_list": [
+        {
+          "lower_progress": 0.0,
+          "upper_limit_ratio": 0.03642857142857143,
+          "upper_progress": 0.1
+        },
+        {
+          "lower_progress": 0.1,
+          "upper_limit_ratio": 0.04625,
+          "upper_progress": 0.2
+        },
+        {
+          "lower_progress": 0.2,
+          "upper_limit_ratio": 0.05625,
+          "upper_progress": 0.3
+        },
+        {
+          "lower_progress": 0.3,
+          "upper_limit_ratio": 0.05625,
+          "upper_progress": 0.4
+        },
+        {
+          "lower_progress": 0.4,
+          "upper_limit_ratio": 0.058750000000000004,
+          "upper_progress": 0.5
+        },
+        {
+          "lower_progress": 0.5,
+          "upper_limit_ratio": 0.06166666666666667,
+          "upper_progress": 0.6
+        },
+        {
+          "lower_progress": 0.6,
+          "upper_limit_ratio": 0.065,
+          "upper_progress": 0.7
+        },
+        {
+          "lower_progress": 0.7,
+          "upper_limit_ratio": 0.06722222222222222,
+          "upper_progress": 0.8
+        },
+        {
+          "lower_progress": 0.8,
+          "upper_limit_ratio": 0.07071428571428572,
+          "upper_progress": 0.9
+        },
+        {
+          "lower_progress": 0.9,
+          "upper_limit_ratio": 0.07,
+          "upper_progress": 1.0
+        }
+      ],
+      "sampler": "top_50_morning_sampler",
+      "use_min_unit_order_size": true,
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "tw_basis_no_weight_back_model_nt_8",
+      "model_type": "lgb",
+      "name": "buy_back_model_p",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 2.49232961989183,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 20.882875557106704
+          }
+        }
+      ],
+      "sampler": "top_50_and_low_liq_afternoon_sampler",
+      "sub_models": [
+        {
+          "name": "buy_back_overnight_sub_model",
+          "threshold": 107.04619800250086,
+          "threshold_percentile": 0.75
+        }
+      ],
+      "use_min_unit_order_size": true,
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_basis_no_weight_back_model_nt_8",
+      "model_type": "lgb",
+      "name": "long_sell_back_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 2.49232961989183,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 12.348186041451031
+          }
+        }
+      ],
+      "sampler": "top_50_and_low_liq_afternoon_sampler",
+      "use_min_unit_order_size": true,
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "disable_qty_floor_on_clear": true,
+      "is_clear": true,
+      "model_name": "tw_basis_no_weight_back_model_nt_8",
+      "model_type": "lgb",
+      "name": "pass_exit_long_with_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0.0,
+            "aggr_max_pq": 200000000,
+            "max_pnl": 1500000.0,
+            "pnl_lean": 0.0,
+            "stack_p": 1,
+            "symbol_lean": 2.49232961989183,
+            "symbol_max_pq": 15000000.0,
+            "threshold": 20.882875557106704
+          }
+        }
+      ],
+      "sampler": "time_1230_1322_sampler",
+      "symbol_toggle_sampler_list": [
+        {
+          "init_state": true,
+          "timed_pr_condition": {
+            "end_progress": 0.988679245,
+            "start_progress": 0.79245283,
+            "turnover_pr": 0.5
+          }
+        }
+      ],
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "disable_qty_floor_on_clear": true,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "pass_exit_long_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": -10000
+          }
+        }
+      ],
+      "sampler": "time_1230_1322_sampler",
+      "symbol_toggle_sampler_list": [
+        {
+          "init_state": false,
+          "timed_pr_condition": {
+            "end_progress": 0.988679245,
+            "start_progress": 0.79245283,
+            "turnover_pr": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 25000000,
+      "disable_qty_floor_on_clear": true,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "force_exit_long_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "force_exit": {
+            "exit_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_1322_1325_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "change_only_cover": true,
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "take_profit_short_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "return_sampler_list": [
+        {
+          "upper_limit_ratio": -0.096
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_one_side_book": true
+    }
+  ]
+}

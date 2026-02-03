@@ -1,0 +1,203 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "lgb_models": [
+      {
+        "name": "buy_signal",
+        "txt_path_list": [
+          "stock/interval/conf/tw/prod_model_202601_v1_team_sci/tw_csim_iter_100_reg_top100short_y_overnight_bps_TOP100SHORT_rel_lr0.04_winsor250_210101_250331.txt"
+        ]
+      },
+      {
+        "name": "sell_signal",
+        "txt_path_list": [
+          "stock/interval/conf/tw/prod_model_202601_v1_team_sci/tw_csim_iter_100_reg_top100short_y_4000move_bps_TOP100SHORT_rel_lr0.04_winsor250_210101_250331.txt"
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "change_only_cover": true,
+      "cooltime_in_ns": 25000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "cover_short_pos_loss_cut",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "exit": {
+            "start_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "pass_exit_overnight_univ_out_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": -10000
+          }
+        }
+      ],
+      "sampler": "carryover_universe_out_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "cover_short_pos_pass",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": -10000
+          }
+        }
+      ],
+      "sampler": "time_1230_1322_sampler",
+      "symbol_toggle_sampler_list": [
+        {
+          "init_state": false,
+          "timed_pr_condition": {
+            "end_progress": 0.988679245,
+            "start_progress": 0.79245283,
+            "turnover_pr": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "cover_short_pos_force_exit",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "force_exit": {
+            "exit_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_1322_1325_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "buy_signal",
+      "model_type": "lgb",
+      "name": "buy_model_pass_bbo",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0,
+            "aggr_max_pq": 500000000,
+            "symbol_lean": 0,
+            "symbol_max_pq": 1500000,
+            "threshold": 17.823335647583008
+          }
+        }
+      ],
+      "sampler": "time_1130_1230_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "sell_signal",
+      "model_type": "lgb",
+      "name": "sell_model_pass_bbo",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 0,
+            "aggr_max_pq": 500000000,
+            "symbol_lean": 0,
+            "symbol_max_pq": 1500000,
+            "threshold": 17.696365356445312
+          }
+        }
+      ],
+      "sampler": "time_0901_1130_sampler"
+    },
+    {
+      "change_only_cover": true,
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "take_profit_short_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "return_sampler_list": [
+        {
+          "upper_limit_ratio": -0.096
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_one_side_book": true
+    }
+  ]
+}

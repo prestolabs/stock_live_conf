@@ -1,0 +1,59 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_position",
+        "value": 0.0
+      }
+    ],
+    "feature_models": [
+      {
+        "name": "target_position",
+        "feature_name": "target_position",
+        "max_abspos_quote": 1
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_sell",
+      "order_side": "SELL_ORDER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1.1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": false
+          }
+        }
+      ],
+      "sampler": "allday_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_buy",
+      "order_side": "BUY_ORDER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1.1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": false
+          }
+        }
+      ],
+      "sampler": "allday_model_sampler"
+    }
+  ]
+}

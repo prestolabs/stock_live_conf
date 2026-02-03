@@ -1,0 +1,408 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "pytorch_models": [
+      {
+        "name": "tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000",
+        "pt_path_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_dm_202512/tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000_feature_list_0.json",
+            "options": {
+              "is_y_standardised": 0
+            },
+            "pt_path": "stock/interval/conf/tw/prod_model_int_dm_202512/tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000_0.pt"
+          }
+        ],
+        "weights": [
+          1.0
+        ]
+      },
+      {
+        "name": "tw_overnight_5M_exchange_neut_all_TOP2000",
+        "pt_path_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_int_dm_202512/tw_overnight_5M_exchange_neut_all_TOP2000_feature_list_0.json",
+            "options": {
+              "is_y_standardised": 0
+            },
+            "pt_path": "stock/interval/conf/tw/prod_model_int_dm_202512/tw_overnight_5M_exchange_neut_all_TOP2000_0.pt"
+          }
+        ],
+        "weights": [
+          1.0
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "change_only_cover": false,
+      "cooltime_in_ns": 25000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "exit_short_loss_cut_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "exit": {
+            "start_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "pass_exit_overnight_univ_out_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": -10000
+          }
+        }
+      ],
+      "sampler": "carryover_universe_out_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000",
+      "model_type": "pytorch",
+      "name": "entry_short_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": true
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20.576980439999993,
+            "aggr_max_pq": 300000000,
+            "end_progress": 0.113207547,
+            "reverse_time_lean": true,
+            "start_progress": 0,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 23.81222652,
+            "time_lean": -20
+          }
+        }
+      ],
+      "return_sampler_list": [
+        {
+          "lower_progress": 0.0,
+          "upper_limit_ratio": 0.027,
+          "upper_progress": 0.1
+        },
+        {
+          "lower_progress": 0.1,
+          "upper_limit_ratio": 0.034999999999999996,
+          "upper_progress": 0.2
+        },
+        {
+          "lower_progress": 0.2,
+          "upper_limit_ratio": 0.045,
+          "upper_progress": 0.3
+        },
+        {
+          "lower_progress": 0.3,
+          "upper_limit_ratio": 0.045,
+          "upper_progress": 0.4
+        },
+        {
+          "lower_progress": 0.4,
+          "upper_limit_ratio": 0.04833333333333333,
+          "upper_progress": 0.5
+        },
+        {
+          "lower_progress": 0.5,
+          "upper_limit_ratio": 0.051666666666666666,
+          "upper_progress": 0.6
+        },
+        {
+          "lower_progress": 0.6,
+          "upper_limit_ratio": 0.055,
+          "upper_progress": 0.7
+        },
+        {
+          "lower_progress": 0.7,
+          "upper_limit_ratio": 0.0575,
+          "upper_progress": 0.8
+        },
+        {
+          "lower_progress": 0.8,
+          "upper_limit_ratio": 0.06166666666666667,
+          "upper_progress": 0.9
+        },
+        {
+          "lower_progress": 0.9,
+          "upper_limit_ratio": 0.065,
+          "upper_progress": 1.0
+        }
+      ],
+      "sampler": "morning_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000",
+      "model_type": "pytorch",
+      "name": "exit_short_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20.576980439999993,
+            "aggr_max_pq": 300000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 17.34173435999999
+          }
+        }
+      ],
+      "sampler": "morning_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000",
+      "model_type": "pytorch",
+      "name": "exit_short_1200_1230_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20.576980439999993,
+            "aggr_max_pq": 300000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 17.34173435999999
+          }
+        }
+      ],
+      "sampler": "time_1200_1230_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_ex_neut_150bp_under_tulp_adj_eod_TOP2000",
+      "model_type": "pytorch",
+      "name": "pass_exit_long_with_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20.576980439999993,
+            "aggr_max_pq": 300000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 17.34173435999999
+          }
+        }
+      ],
+      "sampler": "time_1230_1322_sampler",
+      "symbol_toggle_sampler_list": [
+        {
+          "init_state": true,
+          "timed_pr_condition": {
+            "end_progress": 0.988679245,
+            "start_progress": 0.79245283,
+            "turnover_pr": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "pass_exit_long_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_1230_1322_sampler",
+      "symbol_toggle_sampler_list": [
+        {
+          "init_state": false,
+          "timed_pr_condition": {
+            "end_progress": 0.988679245,
+            "start_progress": 0.79245283,
+            "turnover_pr": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "force_exit_long_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "force_exit": {
+            "exit_bps": 150,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "time_1322_1325_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "change_only_cover": true,
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "take_profit_short_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "return_sampler_list": [
+        {
+          "upper_limit_ratio": -0.096
+        }
+      ],
+      "sampler": "time_0901_1322_sampler",
+      "use_one_side_book": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "tw_overnight_5M_exchange_neut_all_TOP2000",
+      "model_type": "pytorch",
+      "name": "pass_entry_long_overnight_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": true
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 53.26947708000016,
+            "aggr_max_pq": 300000000,
+            "long_block_pq": 152000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 83.59997152000031
+          }
+        }
+      ],
+      "sampler": "afternoon_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "tw_overnight_5M_exchange_neut_all_TOP2000",
+      "model_type": "pytorch",
+      "name": "exit_overnight_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 53.26947708000016,
+            "aggr_max_pq": 300000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 30000000.0,
+            "threshold": 22.93898264
+          }
+        }
+      ],
+      "sampler": "allday_model_sampler"
+    }
+  ]
+}

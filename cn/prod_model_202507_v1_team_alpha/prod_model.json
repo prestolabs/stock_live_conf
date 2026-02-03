@@ -1,0 +1,139 @@
+{
+  "adjust_gmv_daily": false,
+  "constraint_per_symbol": {
+    "book_constraint": {
+      "agg_ratio": 20.0,
+      "level": 1,
+      "ratio": 0.2,
+      "window_in_sec": 1800,
+      // "max_book_stack": 1,
+      "adjust_stack_by_spread_bps": 30
+    },
+    "level_order_constraint": {
+      "agg_cooltime_in_sec": 30,
+      "cooltime_in_sec": 1,
+      "order_cooltime_in_sec": 1
+    },
+    "lot_size_constraint": {
+      "cap_ratio": 0.0001,
+      "lot_pq": 20000,
+      "lot_pq_by_liq_group": [
+        {
+          "liq_group_name": "TOP0-100",
+          "value": 80000
+        },
+        {
+          "liq_group_name": "TOP100-200",
+          "value": 40000
+        },
+        {
+          "liq_group_name": "TOP200-300",
+          "value": 40000
+        },
+        {
+          "liq_group_name": "TOP300-400",
+          "value": 40000
+        },
+        {
+          "liq_group_name": "TOP400-600",
+          "value": 30000
+        },
+        {
+          "liq_group_name": "TOP600-900",
+          "value": 30000
+        },
+        {
+          "liq_group_name": "TOP900-1200",
+          "value": 30000
+        },
+        {
+          "liq_group_name": "TOP1200-2000",
+          "value": 20000
+        },
+      ]
+    },
+    "position_constraint": {
+      "cap_ratio_max": 0.01,
+      "cap_ratio_min": -0.01,
+      "pq_max": 4200000,
+      "pq_min": -4200000
+    },
+    "pr_constraint": {
+      "filled_ratio": 0.05,
+      "include_auction": false,
+      "potential_ratio": 0.1,
+      "window_in_sec": 600,
+      "agg_filled_ratio": 20,
+      "agg_potential_ratio": 21
+    }
+  },
+  "dates": {
+    "end": 20210706,
+    "start": 20191001
+  },
+  "dump_config_to_tmp": true,
+  "gmv": 42000000,
+  "mem_per_cpu2": 2500,
+  "net_balance_relaxation_ratio": 0.01,
+  // "smv_ratio": 0.5,
+  "params": {
+    "desired_pq_max": 200000000.0,
+    "execution_mode": "TARGET_POSITION_QTY",
+    "ignorable_remaining_qty_ratio": 0.1,
+    "level_order_count_max": 1,
+    "lot_pq": 200000000.0,
+    "max_cap_ratio": 0.001,
+    "max_payup_ratio_from_agg": 0.225,
+    "max_payup_ratio_from_pass": 0.235,
+    "num_transaction_limit": 25,
+    "timeret_logging_in_sim": false,
+    "transaction_window_sec": 1,
+    "write_qty_adjust_info": false,
+    "infer_trade_side": true,
+    "long_only": false,
+    "working_range": 1,
+    // "reduced_universes": [
+    //   {
+    //     "prev_ndays": 21,
+    //     "universe_str": "TOP1200",
+    //   }
+    // ],  
+  },
+  "path_info": {
+    "calculator_spec_path": "stock/interval/conf/cn/prod_model_202507_v1_team_alpha/calculator_spec.json",
+    "model_spec_path": "stock/interval/conf/cn/prod_model_202507_v1_team_alpha/model_spec.json",
+    "sim_objh_config": "",
+    "working_dir_root": "$HOME/equity/",
+    "target_position_path": "/remote/iosg/stock-5/bot-stock-ops/temp/cn/combo000_op000.pos.csv",
+  },
+  "remove_config": false,
+  "symbology": {
+    "cache_date": "recent",
+    "distributed_feed_root": true,
+    "region": "CN_EQUITY",
+    "exchange": "SZSE",
+    "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
+    "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
+    "universe_str": "TOP2000",
+    "use_universe_feed": true,
+    "machine": "complete.cn.stock"
+  },
+  "short_selling": {
+    "inventory_vendor": "CICC",
+    "universe": "TOP2000"
+  },
+  "sim_analyzer": {
+    "include_hedged_metric": false
+  },
+  "liq_group_names": [
+    "TOP0-100",
+    "TOP100-200",
+    "TOP200-300",
+    "TOP300-400",
+    "TOP400-600",
+    "TOP600-900",
+    "TOP900-1200",
+    "TOP1200-2000"
+  ],
+  "tag": "cn_test30"
+}

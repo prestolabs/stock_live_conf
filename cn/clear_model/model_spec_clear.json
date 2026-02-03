@@ -1,0 +1,46 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "buy_cover_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "allday_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_cover_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "allday_sampler"
+    }
+  ]
+}

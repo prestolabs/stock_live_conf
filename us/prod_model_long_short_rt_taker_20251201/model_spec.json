@@ -1,0 +1,255 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "lgb_models": [
+      {
+        "name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+        "txt_path_list": [
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_0.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_1.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_2.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_3.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_4.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_5.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_6.txt",
+          "stock/interval/conf/us/prod_model_long_short_rt_taker_20251201/e1_7200s_mc_top200_all_model_cv_nt_12_7.txt"
+        ],
+        "weights": [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "short_buy_univ_out_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "long_sell_univ_out_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "buy_front_model_p",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 62.47307359901161
+          }
+        }
+      ],
+      "realtime_feature_filter_sampler": [
+        "X.LookupFeature.log_cum_rotation_ratio >= 0.0003"
+      ],
+      "sampler": "front_model_sampler",
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "sell_front_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 79.93410577533831
+          }
+        }
+      ],
+      "realtime_feature_filter_sampler": [
+        "X.LookupFeature.log_cum_rotation_ratio >= 0.0003"
+      ],
+      "sampler": "front_model_sampler",
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "buy_front_reduce_model_p",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 62.47307359901161
+          }
+        }
+      ],
+      "realtime_feature_filter_sampler": [
+        "X.LookupFeature.log_cum_rotation_ratio < 0.0003"
+      ],
+      "sampler": "front_model_sampler",
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "sell_front_reduce_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 79.93410577533831
+          }
+        }
+      ],
+      "realtime_feature_filter_sampler": [
+        "X.LookupFeature.log_cum_rotation_ratio < 0.0003"
+      ],
+      "sampler": "front_model_sampler",
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "buy_middle_back_model_p",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 62.47307359901161
+          }
+        }
+      ],
+      "sampler": "middle_back_model_sampler",
+      "use_nan": true
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "e1_7200s_mc_top200_all_model_cv_nt_12",
+      "model_type": "lgb",
+      "name": "sell_middle_back_model_p",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pos_sampler_list": [],
+      "pricers": [
+        {
+          "agg_bbo": {
+            "aggr_lean": 35.601794843587484,
+            "aggr_max_pq": 5000000,
+            "max_pnl": 30000.0,
+            "pnl_lean": 1068.0538453076244,
+            "stack_p": 1.5,
+            "symbol_lean": 17.800897421793742,
+            "symbol_max_pq": 300000.0,
+            "threshold": 79.93410577533831
+          }
+        }
+      ],
+      "sampler": "middle_back_model_sampler",
+      "use_nan": true
+    }
+  ]
+}

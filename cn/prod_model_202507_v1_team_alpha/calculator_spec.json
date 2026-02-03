@@ -1,0 +1,23 @@
+{
+  "basic_data": [
+  ],
+  "expression": [
+    "HHMMSS = hhmmss",
+    "UNIVERSE = TOP2000",
+    "universe = UNIVERSE",
+    "VALID = UNIVERSE",
+    "allday_sampler = And(Lt(hhmmss, 145700), And(VALID, Gt(hhmmss, 93000)))",
+    "morning_sampler = And(Le(hhmmss, 113000), And(VALID, Gt(hhmmss, 93000)))",
+    "afternoon_sampler = And(Lt(hhmmss, 145700), And(VALID, Ge(hhmmss, 123000)))"
+  ],
+  "io_spec": {
+    "dump_data_names": [],
+    "dump_data_root": "",
+    "read_data_names": [
+      "target_position",
+      "hhmmss",
+      "TOP2000"
+    ]
+  },
+  "n_prev_days": 0
+}

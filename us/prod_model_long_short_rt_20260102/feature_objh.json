@@ -1,0 +1,59 @@
+{
+  "name": "predefined2",
+  "no_dft": true,
+  "extra_params": {
+    "samplers": [
+      {
+        "name": "exec_model",
+        "cool_time_ms": 30e3,
+        "comparisons": [
+          "Datetime.hhmm >= 930",
+          "Datetime.hhmm < 1600",
+          "ExternalInfo.top600 == 1"
+        ]
+      },
+    ],
+    "group_features": [
+      "GroupFeatureSungilshim"
+    ],
+    "features": [
+      {
+        "name": "LookupFeature",
+        "deps": ["GroupFeatureSungilshim"],
+        "config_obj": {
+        }
+      },
+      {
+        "name": "KrxProdFeature",
+        "deps": ["{symbolid}.ExternalInfo"],
+        "config_obj": {
+          "rate_upper_limit": 2.0,
+          "rate_lower_limit": -2.0,
+          "turnover_ratio_upper_limit": 10.0
+        }
+      }
+    ],
+    "group_ygens": {
+      "sides": [
+        "buy",
+      ],
+      "times": [
+        15,
+        30,
+        60,
+        180,
+        300,
+        600,
+        900,
+        1800,
+        3600,
+        7200,
+        14400,
+        "overnight"
+      ],
+      "types": [
+        "GroupTimeForward",
+      ],
+    }
+  }
+}

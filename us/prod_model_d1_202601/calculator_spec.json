@@ -1,0 +1,22 @@
+{
+  "basic_data": [
+  ],
+  "expression": [
+    "hhmmss",
+    "universe = TOP2000_PIT",
+    "universe_out = Negation(universe)",
+    "allday_sampler = And(universe, And(Lt(hhmmss, 160000), Ge(hhmmss, 93000)))",
+    "universe_out_sampler = universe_out"
+  ],
+  "interval_1day": 390,
+  "io_spec": {
+    "dump_data_names": [
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "hhmmss",
+      "TOP2000_PIT"
+    ]
+  },
+  "n_prev_days": 0
+}

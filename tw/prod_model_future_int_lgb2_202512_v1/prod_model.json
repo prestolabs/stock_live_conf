@@ -1,0 +1,83 @@
+{
+  "adjust_gmv_daily": false,
+  "constraint_per_symbol": {
+    "book_constraint": {
+      "adjust_stack_by_spread_bps": 30,
+      "agg_ratio": 10.0,
+      "level": 1,
+      "ratio": 0.2,
+      "window_in_sec": 1800
+    },
+    "level_order_constraint": {
+      "agg_cooltime_in_sec": 30,
+      "cooltime_in_sec": 1,
+      "error_cooltime_in_sec": 300,
+      "order_cooltime_in_sec": 1
+    },
+    "lot_size_constraint": {
+      "lot_pq": 500000
+    },
+    "position_constraint": {
+      "pq_max": 10000000,
+      "pq_min": -10000000
+    },
+    "pr_constraint": {
+      "agg_filled_ratio": 10,
+      "agg_potential_ratio": 11,
+      "filled_ratio": 0.1,
+      "include_auction": false,
+      "potential_ratio": 0.15,
+      "window_in_sec": 600
+    }
+  },
+  "dates": {
+    "end": 20210706,
+    "start": 20191001
+  },
+  "dump_config_to_tmp": true,
+  "gmv": 100000000,
+  "mem_per_cpu2": 2500,
+  "net_balance_relaxation_ratio": 0.01,
+  "params": {
+    "desired_pq_max": 50000000.0,
+    "execution_mode": "TAKER_ALL",
+    "ignorable_remaining_qty_ratio": 0.1,
+    "infer_trade_side": true,
+    "level_order_count_max": 1,
+    "long_only": false,
+    "lot_pq": 50000000.0,
+    "max_payup_ratio_from_agg": 0.225,
+    "max_payup_ratio_from_pass": 0.235,
+    "num_transaction_limit": 25,
+    "order_lifetime_in_sec": 300,
+    "timeret_logging_in_sim": false,
+    "transaction_window_sec": 1,
+    "working_range": 3,
+    "write_qty_adjust_info": false
+  },
+  "path_info": {
+    "calculator_spec_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202512_v1/calculator_spec.json",
+    "model_spec_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202512_v1/model_spec.json",
+    "sim_objh_config": "",
+    "working_dir_root": "$HOME/equity/"
+  },
+  "remove_config": true,
+  "sim_analyzer": {
+    "include_hedged_metric": false
+  },
+  "symbology": {
+    "cache_date": "recent",
+    "distributed_feed_root": false,
+    "exchange": "TAIFEX",
+    "feed_type": "future_realtime",
+    "focus_ref_comp": "TAIFEX_SSF_TW_SPOT",
+    "machine": "complete.tw.stock",
+    "product_type": "FUTURES",
+    "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
+    "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
+    "region": "TW_EQUITY",
+    "universe_str": "TOP50_5days_rollover_2d",
+    "use_universe_feed": true
+  },
+  "tag": "prod_model_future_int_lgb2_202512_v1"
+}

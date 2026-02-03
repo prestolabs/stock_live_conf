@@ -1,0 +1,19 @@
+{
+  "basic_data": [],
+  "expression": [
+    "HHMMSS = hhmmss",
+    "valid_time_window(s, e) = And(Lt(hhmmss, e), Ge(hhmmss, s))",
+    "allday_model_sampler = valid_time_window(90100, 132500)"
+  ],
+  "io_spec": {
+    "dump_data_names": [
+      "allday_model_sampler"
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "target_position",
+      "hhmmss"
+    ]
+  },
+  "n_prev_days": 0
+}

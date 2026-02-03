@@ -1,0 +1,18 @@
+{
+  "basic_data": [
+  ],
+  "expression": [
+    "hhmmss",
+    "allday_sampler = And(Lt(hhmmss, 150000), Ge(hhmmss, 93000))"
+  ],
+  "interval_1day": 240,
+  "io_spec": {
+    "dump_data_names": [
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "hhmmss"
+    ]
+  },
+  "n_prev_days": 0
+}

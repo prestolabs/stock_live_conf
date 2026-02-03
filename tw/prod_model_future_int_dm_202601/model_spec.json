@@ -1,0 +1,158 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "pytorch_models": [
+      {
+        "name": "taifex_eod_spread_filter_model",
+        "pt_path_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_future_int_dm_202601/taifex_eod_spread_filter_model_feature_list_0.json",
+            "options": {
+              "is_y_standardised": 0
+            },
+            "pt_path": "stock/interval/conf/tw/prod_model_future_int_dm_202601/taifex_eod_spread_filter_model_0.pt"
+          }
+        ],
+        "weights": [
+          1.0
+        ]
+      },
+      {
+        "name": "taifex_overnight_all_model",
+        "pt_path_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_future_int_dm_202601/taifex_overnight_all_model_feature_list_0.json",
+            "options": {
+              "is_y_standardised": 0
+            },
+            "pt_path": "stock/interval/conf/tw/prod_model_future_int_dm_202601/taifex_overnight_all_model_0.pt"
+          }
+        ],
+        "weights": [
+          1.0
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "buy_cover_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "s_trading_universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_cover_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "s_trading_universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_eod_spread_filter_model",
+      "model_type": "pytorch",
+      "name": "buy_intraday_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 3.2523534504,
+            "aggr_max_pq": 100000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 4.8945412820000005
+          }
+        }
+      ],
+      "sampler": "s_trading_morning_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_eod_spread_filter_model",
+      "model_type": "pytorch",
+      "name": "sell_intraday_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 3.2523534504,
+            "aggr_max_pq": 100000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 3.236342343999998
+          }
+        }
+      ],
+      "sampler": "s_trading_morning_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_overnight_all_model",
+      "model_type": "pytorch",
+      "name": "buy_overnight_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 10.328925572000003,
+            "aggr_max_pq": 100000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 13.646940050000003
+          }
+        }
+      ],
+      "sampler": "s_trading_afternoon_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_overnight_all_model",
+      "model_type": "pytorch",
+      "name": "sell_overnight_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 10.328925572000003,
+            "aggr_max_pq": 100000000,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 12.17537388
+          }
+        }
+      ],
+      "sampler": "s_trading_afternoon_model_sampler"
+    }
+  ]
+}

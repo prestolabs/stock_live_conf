@@ -1,0 +1,180 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_position",
+        "value": 0.0
+      }
+    ],
+    "feature_models": [
+      {
+        "name": "target_position",
+        "feature_name": "target_position",
+        "max_abspos_quote": 1,
+      }
+    ],
+  },
+  "model_spec": [
+    // {
+    //   "cooltime_in_ns": 500000000,
+    //   "name": "pass",
+    //   "model_name": "no_model",
+    //   "model_type": "constant",
+    //   "negative_sign": false,
+    //   "order_side": "BUY_ORDER",
+    //   "pricer": {
+    //     "pass_bbo": {
+    //       "aggr_lean": 139.00757796648676,
+    //       "aggr_max_pq": 125000000,
+    //       "symbol_lean": 0.0,
+    //       "symbol_max_pq": 10000000.0,
+    //       "threshold": 30.428367589994583,
+    //       "long_block_pq": 152000000
+    //     }
+    //   },
+    //   "sampler": "allday_sampler",
+    // },
+    // {
+    //   "cooltime_in_ns": 500000000,
+    //   "model_name": "target_position",
+    //   "model_type": "feature",
+    //   "name": "target_position_model_all_buy",
+    //   "order_side": "BUY_ORDER",
+    //   "negative_sign": false,
+    //   "pricers": [
+    //     {
+    //       "target_position_pass_bbo": {
+    //         "gmv": 1e8,
+    //         "max_bps": 0.0,
+    //         "is_target_qty": true,
+    //         "trade_one_direction_only": true,
+    //       }
+    //     }
+    //   ],
+    //   "sampler": "allday_sampler",
+    // },
+    // {
+    //   "cooltime_in_ns": 500000000,
+    //   "model_name": "target_position",
+    //   "model_type": "feature",
+    //   "name": "target_position_model_all_sell",
+    //   "order_side": "SELL_ORDER",
+    //   "negative_sign": false,
+    //   "pricers": [
+    //     {
+    //       "target_position_pass_bbo": {
+    //         "gmv": 1e8,
+    //         "max_bps": 0.0,
+    //         "is_target_qty": true,
+    //         "trade_one_direction_only": true,
+    //       }
+    //     }
+    //   ],
+    //   "sampler": "allday_sampler",
+    // },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_all_buy",
+      "order_side": "BUY_ORDER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": true
+        }
+      ],
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": true,
+          }
+        }
+      ],
+      "sampler": "allday_sampler",
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_all_sell",
+      "order_side": "SELL_ORDER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": true,
+          }
+        }
+      ],
+      "sampler": "allday_sampler",
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_all_buy_to_cover",
+      "order_side": "BUY_TO_COVER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ],
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": true,
+          }
+        }
+      ],
+      "sampler": "allday_sampler",
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "target_position",
+      "model_type": "feature",
+      "name": "target_position_model_all_short_sell",
+      "order_side": "SHORT_SELL_ORDER",
+      "negative_sign": false,
+      "disable_qty_floor_on_clear": true,
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": true
+        }
+      ],
+      "pricers": [
+        {
+          "target_position_pass_bbo": {
+            "gmv": 1e8,
+            "max_bps": 0.0,
+            "is_target_qty": true,
+            "trade_one_direction_only": true,
+          }
+        }
+      ],
+      "sampler": "allday_sampler",
+    },
+  ]
+}

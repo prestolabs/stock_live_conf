@@ -1,0 +1,154 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "lgb_models": [
+      {
+        "name": "taifex_all_eod_model",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202602_v1/taifex_all_eod_model_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202602_v1/taifex_all_eod_model_merge-c5.so"
+          }
+        ]
+      },
+      {
+        "name": "taifex_all_overnight_model",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202602_v1/taifex_all_overnight_model_feature_list.json",
+            "so_path": "stock/interval/conf/tw/prod_model_future_int_lgb2_202602_v1/taifex_all_overnight_model_merge-c5.so"
+          }
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "disable_qty_floor_on_clear": true,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "buy_cover_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "price_cap_with_tulp_tllp": true,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "disable_qty_floor_on_clear": true,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_cover_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "price_cap_with_tulp_tllp": true,
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_all_eod_model",
+      "model_type": "lgb",
+      "name": "buy_eod_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 13.262959756539056,
+            "aggr_max_pq": 100000000,
+            "price_cap_with_tulp_tllp": true,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 13.299934529940712
+          }
+        }
+      ],
+      "sampler": "intraday_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_all_eod_model",
+      "model_type": "lgb",
+      "name": "sell_eod_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 13.262959756539056,
+            "aggr_max_pq": 100000000,
+            "price_cap_with_tulp_tllp": true,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 19.85746486140693
+          }
+        }
+      ],
+      "sampler": "intraday_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_all_overnight_model",
+      "model_type": "lgb",
+      "name": "buy_overnight_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 23.86632165271069,
+            "aggr_max_pq": 100000000,
+            "price_cap_with_tulp_tllp": true,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 25.433905148564705
+          }
+        }
+      ],
+      "sampler": "overnight_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "taifex_all_overnight_model",
+      "model_type": "lgb",
+      "name": "sell_overnight_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 23.86632165271069,
+            "aggr_max_pq": 100000000,
+            "price_cap_with_tulp_tllp": true,
+            "symbol_lean": 0.0,
+            "symbol_max_pq": 10000000.0,
+            "threshold": 34.23189898321201
+          }
+        }
+      ],
+      "sampler": "overnight_model_sampler"
+    }
+  ]
+}

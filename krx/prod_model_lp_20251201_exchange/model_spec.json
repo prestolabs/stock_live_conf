@@ -1,0 +1,115 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "lgb_models": [
+      {
+        "name": "krx_weighted_exchange_neut_overnight_model",
+        "so_file_list": [
+          {
+            "feature_list_path": "stock/interval/conf/krx/prod_model_lp_20251201_exchange/krx_weighted_exchange_neut_overnight_model_feature_list.json",
+            "so_path": "stock/interval/conf/krx/prod_model_lp_20251201_exchange/krx_weighted_exchange_neut_overnight_model_merge-c5.so"
+          }
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "threshold": -10000
+          }
+        }
+      ],
+      "sampler": "universe_out_model_sampler_capcut"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "buy_inverse_etf_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "hedge_agg_bbo": {
+            "gmv": 5000000000,
+            "hedge_gap_rate": 0.02,
+            "hedge_ratio": 1
+          }
+        }
+      ],
+      "sampler": "kq150_inverse_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_inverse_etf_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "hedge_agg_bbo": {
+            "gmv": 5000000000,
+            "hedge_gap_rate": 0.02,
+            "hedge_ratio": 1
+          }
+        }
+      ],
+      "sampler": "kq150_inverse_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "krx_weighted_exchange_neut_overnight_model",
+      "model_type": "lgb",
+      "name": "buy_overnight_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 104.54905875253498,
+            "aggr_max_pq": 5000000000,
+            "symbol_lean": 104.54905875253498,
+            "symbol_max_pq": 125000000.0,
+            "threshold": 48.722566911044645
+          }
+        }
+      ],
+      "sampler": "all_model_sampler_capcut"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "krx_weighted_exchange_neut_overnight_model",
+      "model_type": "lgb",
+      "name": "sell_overnight_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 104.54905875253498,
+            "aggr_max_pq": 5000000000,
+            "symbol_lean": 104.54905875253498,
+            "symbol_max_pq": 125000000.0,
+            "threshold": 160.3755505940253
+          }
+        }
+      ],
+      "sampler": "all_model_sampler_capcut"
+    }
+  ]
+}
