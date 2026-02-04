@@ -15,11 +15,11 @@
       "order_cooltime_in_sec": 1
     },
     "lot_size_constraint": {
-      "lot_pq": 200000
+      "lot_pq": 500000
     },
     "position_constraint": {
-      "pq_max": 4000000,
-      "pq_min": -4000000
+      "pq_max": 13000000,
+      "pq_min": -13000000
     },
     "pr_constraint": {
       "agg_filled_ratio": 10,
@@ -35,7 +35,7 @@
     "start": 20191001
   },
   "dump_config_to_tmp": true,
-  "gmv": 40000000,
+  "gmv": 130000000,
   "mem_per_cpu2": 2500,
   "net_balance_relaxation_ratio": 0.01,
   "params": {
