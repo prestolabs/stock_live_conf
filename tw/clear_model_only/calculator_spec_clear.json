@@ -1,0 +1,26 @@
+{
+  "basic_data": [
+  ],
+  "expression": [
+    "TRADE_OPEN",
+    "DAY_LOW_PRICE",
+    "DAY_HIGH_PRICE",
+    "prev_turnover_rank_top2000",
+    "X.PREV_TURNOVER_RANK_TOP2000 = prev_turnover_rank_top2000",
+    "hhmmss",
+    "valid_time_window(s, e) = And(Lt(hhmmss, e), Ge(hhmmss, s))",
+    "clear_model_sampler = valid_time_window(90100, 132500)",
+    "clear_model_sampler_0900_1322 = valid_time_window(90100, 132200)",
+    "clear_model_sampler_1322_1325 = valid_time_window(132200, 132500)",
+  ],
+  "io_spec": {
+    "dump_data_names": [
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "prev_turnover_rank_top2000",
+      "hhmmss",
+    ]
+  },
+  "n_prev_days": 0
+}

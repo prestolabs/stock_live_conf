@@ -1,0 +1,165 @@
+{
+  "adjust_gmv_daily": false,
+  "constraint_per_symbol": {
+    "book_constraint": {
+      "adjust_stack_by_spread_bps": 30,
+      "agg_ratio": 10.0,
+      "level": 1,
+      "max_book_stack": 2,
+      "max_book_stack_by_liq_group": [
+        {
+          "liq_group_name": "TOP0-50",
+          "value": 4
+        },
+        {
+          "liq_group_name": "TOP50-100",
+          "value": 3.0
+        },
+        {
+          "liq_group_name": "TOP100-200",
+          "value": 2
+        },
+        {
+          "liq_group_name": "TOP200-300",
+          "value": 1.5
+        },
+        {
+          "liq_group_name": "TOP300-400",
+          "value": 1.5
+        },
+        {
+          "liq_group_name": "TOP400-600",
+          "value": 1.0
+        },
+        {
+          "liq_group_name": "TOP600-900",
+          "value": 1.0
+        }
+      ],
+      "ratio": 0.2,
+      "window_in_sec": 1800
+    },
+    "level_order_constraint": {
+      "agg_cooltime_in_sec": 30,
+      "cooltime_in_sec": 1,
+      "error_cooltime_in_sec": 300,
+      "order_cooltime_in_sec": 1
+    },
+    "lot_size_constraint": {
+      "agg_lot_pq": 25000000,
+      "agg_lot_qty": 499000,
+      "cap_ratio": 0.001,
+      "lot_pq": 375000,
+      "lot_pq_by_liq_group": [
+        {
+          "liq_group_name": "TOP0-50",
+          "value": 750000
+        },
+        {
+          "liq_group_name": "TOP50-100",
+          "value": 562500
+        },
+        {
+          "liq_group_name": "TOP100-200",
+          "value": 375000
+        },
+        {
+          "liq_group_name": "TOP200-300",
+          "value": 375000
+        },
+        {
+          "liq_group_name": "TOP300-400",
+          "value": 375000
+        },
+        {
+          "liq_group_name": "TOP400-600",
+          "value": 375000
+        },
+        {
+          "liq_group_name": "TOP600-900",
+          "value": 375000
+        }
+      ]
+    },
+    "position_constraint": {
+      "cap_ratio_max": 0.01,
+      "cap_ratio_min": -0.01,
+      "pq_max": 18000000,
+      "pq_min": -18000000
+    },
+    "pr_constraint": {
+      "agg_filled_ratio": 10,
+      "agg_potential_ratio": 11,
+      "filled_ratio": 0.07,
+      "include_auction": false,
+      "potential_ratio": 0.12,
+      "window_in_sec": 600
+    }
+  },
+  "dates": {
+    "end": 20210706,
+    "start": 20191001
+  },
+  "dump_config_to_tmp": true,
+  "gmv": 200000000,
+  "liq_group_names": [
+    "TOP0-50",
+    "TOP50-100",
+    "TOP100-200",
+    "TOP200-300",
+    "TOP300-400",
+    "TOP400-600",
+    "TOP600-900"
+  ],
+  "mem_per_cpu2": 2500,
+  "net_balance_relaxation_ratio": 0.01,
+  "params": {
+    "desired_pq_max": 200000000.0,
+    "execution_mode": "TARGET_POSITION",
+    "ignorable_remaining_qty_ratio": 0.1,
+    "infer_trade_side": true,
+    "level_order_count_max": 1,
+    "long_only": false,
+    "lot_pq": 200000000.0,
+    "max_cap_ratio": 0.001,
+    "max_payup_ratio_from_agg": 0.225,
+    "max_payup_ratio_from_pass": 0.235,
+    "num_transaction_limit": 25,
+    "order_lifetime_in_sec": 1800,
+    "short_cover_end_time_hhmm": "1325",
+    "short_cover_exit_bps": 2000,
+    "short_cover_start_time_hhmm": "1324",
+    "timeret_logging_in_sim": false,
+    "transaction_window_sec": 1,
+    "write_qty_adjust_info": false
+  },
+  "path_info": {
+    "calculator_spec_path": "stock/interval/conf/tw/prod_model_202511_v1_team_alpha/calculator_spec.json",
+    "model_spec_path": "stock/interval/conf/tw/prod_model_202511_v1_team_alpha/model_spec.json",
+    "sim_objh_config": "",
+    "working_dir_root": "$HOME/equity/"
+  },
+  "remove_config": true,
+  "short_selling": {
+    "inventory_vendor": "ALL",
+    "universe": "TOP600SHORT"
+  },
+  "sim_analyzer": {
+    "adjust_impact_live_tag": "presto_stock_yuanta1",
+    "include_hedged_metric": false,
+    "intra_interval_in_sec": 60,
+  },
+  "smv_ratio": 0.68,
+  "symbology": {
+    "cache_date": "recent",
+    "distributed_feed_root": false,
+    "exchange": "TWSE",
+    "machine": "complete.tw.stock",
+    "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
+    "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
+    "region": "TW_EQUITY",
+    "universe_str": "TOP2000",
+    "use_universe_feed": true
+  },
+  "tag": "prod_model_202511_v1_team_alpha"
+}

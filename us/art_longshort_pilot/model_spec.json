@@ -1,0 +1,100 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+    "pytorch_models": [
+      {
+        "name": "signal_name",
+        "pt_path_list": [
+          {
+            "pt_path": "stock/interval/conf/us/art_longshort_pilot/single_251009z2_102003_199.pt",
+            "feature_list_path": "stock/interval/conf/us/art_longshort_pilot/feature_list.json",
+            "options": {
+              "is_y_standardised": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "buy_cover_no_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_default_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "sell_cover_no_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "univ_out_pass_bbo": {
+            "threshold": 0
+          }
+        }
+      ],
+      "sampler": "universe_out_default_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "signal_name",
+      "model_type": "pytorch",
+      "name": "buy_all_model",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20,
+            "symbol_lean": 2,
+            "aggr_max_pq": 2000000,
+            "symbol_max_pq": 50000,
+            "threshold": 14
+          }
+        }
+      ],
+      "sampler": "allday_model_sampler"
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "model_name": "signal_name",
+      "model_type": "pytorch",
+      "name": "sell_all_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricers": [
+        {
+          "pass_bbo": {
+            "aggr_lean": 20,
+            "symbol_lean": 2,
+            "aggr_max_pq": 2000000,
+            "symbol_max_pq": 50000,
+            "threshold": 10
+          }
+        }
+      ],
+      "sampler": "allday_model_sampler"
+    }
+  ]
+}
