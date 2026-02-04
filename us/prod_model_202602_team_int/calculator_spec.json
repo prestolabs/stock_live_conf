@@ -1,0 +1,73 @@
+{
+  "basic_data": [
+    "TRADE_CLOSE",
+    "TRADE_PQ",
+    "TRADE_BUY_PQ_INFERRED",
+    "TRADE_SELL_PQ_INFERRED",
+    "TRADE_LOW"
+  ],
+  "expression": [
+    "interval_1day = 390",
+    "interval_3day = 1170",
+    "interval_4day = 1560",
+    "interval_5day = 1950",
+    "TRADE_CLOSE",
+    "TRADE_PQ",
+    "TRADE_BUY_PQ_INFERRED",
+    "TRADE_SELL_PQ_INFERRED",
+    "ADJ_FACTOR = adj_factor",
+    "nshares_day",
+    "exch",
+    "HHMMSS = hhmmss",
+
+    "universe = Fillforward(TOP600, interval_1day)",
+    "VALID = universe",
+    "REALTIME_VALID = TOP200",
+    "D1_VALID = And(TOP2000_PIT, Negation(REALTIME_VALID))",
+    "UNIVERSE_OUT_VALID = Negation(Or(REALTIME_VALID, D1_VALID))",
+
+    "CLOSE_PRICE = Fillforward(Multiply(TRADE_CLOSE, adj_factor), interval_1day)",
+    "CsMean(x) = Divide(CsSum(x, universe), CsSum(IsFinite(x), universe))",
+    "ExchangeNeut(x) = CsGroupNeutralize(x, exch, universe)",
+    "Return(x, y) = Subtract(Divide(y, x), 1)",
+    "Low2MidReturn(w) = NanToZero(Return(TsMin(Multiply(TRADE_LOW, adj_factor), w), CLOSE_PRICE))",
+    "NetTradeRatio(w1, w2) = NanToZero(Divide(Subtract(TsSum(TRADE_BUY_PQ_INFERRED, w1), TsSum(TRADE_SELL_PQ_INFERRED, w1)), ZeroToNan(TsSum(TRADE_PQ, w2))))",
+
+    "LOW_2_MID_3D.signal = Low2MidReturn(interval_3day)",
+    "LOW_2_MID_3D_REL.signal = ExchangeNeut(Low2MidReturn(interval_3day))",
+    "LOW_2_MID_4D.signal = Low2MidReturn(interval_4day)",
+    "LOW_2_MID_4D_REL.signal = ExchangeNeut(Low2MidReturn(interval_4day))",
+    "NET_TRADE_RATIO_3D_REL.signal = ExchangeNeut(NetTradeRatio(interval_3day, interval_5day))",
+    "market_cap = Multiply(CLOSE_PRICE, nshares_day)",
+
+    "realtime_valid_time_window(s, e) = And(And(REALTIME_VALID, Lt(hhmmss, e)), Ge(hhmmss, s))",
+    "valid_time_window(s, e) = And(And(VALID, Lt(hhmmss, e)), Ge(hhmmss, s))",
+    "all_model_sampler = valid_time_window(93100, 160000)",
+    "d1_valid_time_window(s, e) = And(And(D1_VALID, Lt(hhmmss, e)), Ge(hhmmss, s))",
+    "front_model_sampler = realtime_valid_time_window(93100, 153000)",
+    "middle_back_model_sampler = realtime_valid_time_window(153000, 160000)",
+    "all_d1_model_sampler = Or(d1_valid_time_window(93100, 160000), middle_back_model_sampler)",
+    "universe_out_model_sampler = And(And(UNIVERSE_OUT_VALID, Lt(hhmmss, 160000)), Ge(hhmmss, 93100))"
+  ],
+  "interval_1day": 390,
+  "io_spec": {
+    "dump_data_names": [
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "TOP200",
+      "TOP600",
+      "TOP2000_PIT",
+      "TRADE_CLOSE",
+      "TRADE_PQ",
+      "TRADE_BUY_PQ_INFERRED",
+      "TRADE_SELL_PQ_INFERRED",
+      "TRADE_LOW",
+      "adj_factor",
+      "nshares_day",
+      "hhmmss",
+      "exch"
+    ]
+  },
+  "n_prev_days": 5
+}
