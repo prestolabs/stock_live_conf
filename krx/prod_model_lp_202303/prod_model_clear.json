@@ -1,0 +1,72 @@
+// filepath: stock/interval/conf/krx/prod_model_lp_202303/prod_model_clear.json
+{
+  "adjust_gmv_daily": true,
+  "constraint_per_symbol": {
+    "book_constraint": {
+      "level": 1,
+      "max_book_stack": 10,
+      "ratio": 0.2,
+      "window_in_sec": 1800
+    },
+    "level_order_constraint": {
+      "agg_cooltime_in_sec": 30,
+      "cooltime_in_sec": 1,
+      "order_cooltime_in_sec": 1
+    },
+    "lot_size_constraint": {
+      "cap_ratio": 0.0001,
+      "lot_pq": 10000000.0
+    },
+    "position_constraint": {
+      "cap_ratio_max": 0.001,
+      "cap_ratio_min": 0,
+      "pq_max": 2000000000.0,
+      "pq_min": 0
+    },
+    "pr_constraint": {
+      "filled_ratio": 0.05,
+      "include_auction": true,
+      "potential_ratio": 0.1,
+      "window_in_sec": 600
+    }
+  },
+  "dates": {
+    "end": 20210706,
+    "start": 20191001
+  },
+  "dump_config_to_tmp": true,
+  "gmv": 40000000000,
+  "mem_per_cpu2": 2500,
+  "net_balance_relaxation_ratio": 0.01,
+  "params": {
+    "desired_pq_max": 200000000.0,
+    "execution_mode": "CONSTANT",
+    "ignorable_remaining_qty_ratio": 0.1,
+    "level_order_count_max": 1,
+    "lot_pq": 200000000.0,
+    "max_cap_ratio": 0.001,
+    "max_payup_ratio_from_agg": 0.005,
+    "max_payup_ratio_from_pass": 0.015,
+    "num_transaction_limit": 25,
+    "timeret_logging_in_sim": false,
+    "transaction_window_sec": 1,
+    "write_qty_adjust_info": false
+  },
+  "path_info": {
+    "calculator_spec_path": "stock/interval/conf/krx/prod_model_lp_202303/calculator_spec_clear.json",
+    "model_spec_path": "stock/interval/conf/krx/prod_model_lp_202303/model_spec_clear.json",
+    "sim_objh_config": "",
+    "working_dir_root": "$HOME/equity/"
+  },
+  "remove_config": true,
+  "symbology": {
+    "cache_date": "recent",
+    "distributed_feed_root": false,
+    "exchange": "KRX",
+    "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
+    "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
+    "universe_str": "TOP2000",
+    "use_universe_feed": true
+  },
+  "tag": "prod_model_clear"
+}

@@ -1,0 +1,95 @@
+{
+  "adjust_gmv_daily": false,
+  "constraint_per_symbol": {
+    "book_constraint": {
+      "level": 1,
+      "max_book_stack": 30,
+      "ratio": 1,
+      "window_in_sec": 1800
+    },
+    "level_order_constraint": {
+      "agg_cooltime_in_sec": 30,
+      "cooltime_in_sec": 1,
+      "order_cooltime_in_sec": 1
+    },
+    "lot_size_constraint": {
+      "lot_pq": 10000
+    },
+    "position_constraint": {
+      "cap_ratio_max": 0.001,
+      "cap_ratio_min": -0.001,
+      "pq_max": 120000,
+      "pq_min": -120000,
+    },
+    "pr_constraint": {
+      "filled_ratio": 0.05,
+      "include_auction": false,
+      "potential_ratio": 0.1,
+      "window_in_sec": 600
+    }
+  },
+  "dates": {
+    "end": 20210706,
+    "start": 20191001
+  },
+  "dump_config_to_tmp": true,
+  "gmv": 8000000,
+  "mem_per_cpu2": 2500,
+  // only d1 target pos model set this value as -0.05
+  // filled target qty is the most priority.
+  "net_balance_relaxation_ratio": -0.05,
+  "params": {
+    "desired_pq_max": 200000000.0,
+    "execution_mode": "CONSTANT",
+    "ignorable_remaining_qty_ratio": 0.1,
+    "infer_trade_side": true,
+    "level_order_count_max": 1,
+    "long_only": false,
+    "lot_pq": 200000000.0,
+    "max_cap_ratio": 0.001,
+    "max_payup_ratio_from_agg": 0.225,
+    "max_payup_ratio_from_pass": 0.235,
+    "num_transaction_limit": 25,
+    "order_lifetime_in_sec": 600,
+    "reduced_universes": [
+      {
+        "prev_ndays": 21,
+        "universe_str": "TOP2000_PIT"
+      }
+    ],
+    "timeret_logging_in_sim": false,
+    "transaction_window_sec": 1,
+    "working_range_bps": 40,
+    "write_qty_adjust_info": false,
+    // only d1 target pos model should be set cancel when self trade is false
+    // Since I design to signal always higher than threshold
+    // all symbols can be activated SendBuy, Sell.
+    // But it will block by position constraints.
+    "cancel_when_self_trade": false
+  },
+  "path_info": {
+    "calculator_spec_path": "stock/interval/conf/us/prod_model_d1_202601/calculator_spec.json",
+    "feature_objh_config": "",
+    "model_spec_path": "stock/interval/conf/us/prod_model_d1_202601/model_spec.json",
+    "sim_objh_config": "",
+    "working_dir_root": "$HOME/equity/",
+    "team_int_target_position_path": "/remote/iosg/data/etc/portfolio_operations/bot-stock-ops/equity/result/portfolio/US/recent/position/us_live_strategy1_ver1.npz"
+  },
+  "remove_config": true,
+  "sim_analyzer": {
+    "include_hedged_metric": false
+  },
+  "symbology": {
+    "cache_date": "recent",
+    "distributed_feed_root": false,
+    "exchange": "US",
+    "machine": "complete.us.stock.light",
+    "feed_type": "light_realtime",
+    "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
+    "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
+    "region": "US",
+    "universe_str": "TOP2000_PIT",
+    "use_universe_feed": false
+  },
+  "tag": "prod_model_d1_202601"
+}

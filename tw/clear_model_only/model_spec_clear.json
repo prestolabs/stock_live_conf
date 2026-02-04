@@ -1,0 +1,77 @@
+{
+  "model_manager": {
+    "constant_models": [
+      {
+        "name": "no_model",
+        "value": 1.0
+      }
+    ],
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "exit_short_position",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricer": {
+        "univ_out_pass_bbo": {
+          "threshold": -10000
+        }
+      },
+      "sampler": "clear_model_sampler_0900_1322",
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "exit_long_position",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricer": {
+        "univ_out_pass_bbo": {
+          "threshold": -10000
+        }
+      },
+      "sampler": "clear_model_sampler",
+      "pos_sampler_list": [
+        {
+          "min_pos_pq": 0,
+          "min_pos_pq_inclusive": true
+        }
+      ]
+    },
+    {
+      "cooltime_in_ns": 500000000,
+      "is_clear": true,
+      "model_name": "no_model",
+      "model_type": "constant",
+      "name": "force_exit_short_position",
+      "negative_sign": false,
+      "order_side": "BUY_ORDER",
+      "pricer": {
+        "force_exit": {
+          "exit_bps": 150,
+          "threshold": 0
+        }
+      },
+      "sampler": "clear_model_sampler_1322_1325",
+      "use_one_side_book": true,
+      "pos_sampler_list": [
+        {
+          "max_pos_pq": 0,
+          "max_pos_pq_inclusive": false
+        }
+      ]
+    }
+  ]
+}

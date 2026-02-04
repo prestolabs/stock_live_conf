@@ -1,0 +1,25 @@
+{
+  "basic_data": [
+    "BOOK_VALID_COUNT",
+  ],
+  "expression": [
+    "TRADE_OPEN",
+    "DAY_LOW_PRICE",
+    "DAY_HIGH_PRICE",
+    "prev_turnover_rank_top2000",
+    "X.PREV_TURNOVER_RANK_TOP2000 = prev_turnover_rank_top2000",
+    "hhmmss",
+    "VALID = Gt(BOOK_VALID_COUNT, 0)",
+    "sell_clear_model_sampler = And(And(VALID, Le(hhmmss, 152000)), Ge(hhmmss, 90100))",
+  ],
+  "io_spec": {
+    "dump_data_names": [
+    ],
+    "dump_data_root": "",
+    "read_data_names": [
+      "prev_turnover_rank_top2000",
+      "hhmmss",
+    ]
+  },
+  "n_prev_days": 0
+}

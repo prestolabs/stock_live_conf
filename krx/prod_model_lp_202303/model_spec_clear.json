@@ -1,0 +1,27 @@
+{
+  "lgb_model_manager": {
+    "lgb_models": [
+      {
+        "name": "clear_model",
+        "txt_path_list": [
+          "stock/interval/conf/krx/prod_model_lp_202303/clear_model.txt"
+        ]
+      }
+    ]
+  },
+  "model_spec": [
+    {
+      "cooltime_in_ns": 500000000,
+      "lgb_model_name": "clear_model",
+      "name": "clear_model",
+      "negative_sign": true,
+      "order_side": "SELL_ORDER",
+      "pricer": {
+        "pass_bbo": {
+          "threshold": -10000
+        }
+      },
+      "sampler": "sell_clear_model_sampler"
+    }
+  ]
+}
