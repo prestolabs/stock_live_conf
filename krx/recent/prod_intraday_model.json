@@ -1,5 +1,5 @@
 {
-  "adjust_gmv_daily": false,
+  "adjust_gmv_daily": true,
   "constraint_per_symbol": {
     "book_constraint": {
       "agg_ratio": 10000,
@@ -15,14 +15,52 @@
       "sell_order_reverse_cooltime_in_sec": 30
     },
     "lot_size_constraint": {
-      "agg_lot_pq": 50000000,
+      "agg_lot_pq": 80000000,
+      "agg_lot_pq_by_liq_group": [
+        {
+          "liq_group_name": "TOP0-50",
+          "value": 160000000
+        },
+        {
+          "liq_group_name": "TOP50-100",
+          "value": 142000000
+        },
+        {
+          "liq_group_name": "TOP100-200",
+          "value": 124000000
+        },
+        {
+          "liq_group_name": "TOP200-300",
+          "value": 106000000
+        },
+        {
+          "liq_group_name": "TOP300-400",
+          "value": 88000000
+        },
+        {
+          "liq_group_name": "TOP400-600",
+          "value": 80000000
+        },
+        {
+          "liq_group_name": "TOP600-900",
+          "value": 80000000
+        },
+        {
+          "liq_group_name": "TOP900-1200",
+          "value": 80000000
+        },
+        {
+          "liq_group_name": "TOP1200-2000",
+          "value": 20000000
+        }
+      ],
       "cap_ratio": 0.001,
-      "lot_pq": 10000000.0
+      "lot_pq": 80000000
     },
     "position_constraint": {
       "cap_ratio_max": 0.01,
       "cap_ratio_min": 0,
-      "pq_max": 300000000,
+      "pq_max": 480000000,
       "pq_min": 0
     },
     "pr_constraint": {
@@ -35,13 +73,23 @@
       "window_in_sec": 600
     }
   },
-  "continue_sim": true,
   "dates": {
     "end": 20210706,
     "start": 20191001
   },
   "dump_config_to_tmp": true,
-  "gmv": 5000000000,
+  "gmv": 8000000000,
+  "liq_group_names": [
+    "TOP0-50",
+    "TOP50-100",
+    "TOP100-200",
+    "TOP200-300",
+    "TOP300-400",
+    "TOP400-600",
+    "TOP600-900",
+    "TOP900-1200",
+    "TOP1200-2000"
+  ],
   "mem_per_cpu2": 2500,
   "net_balance_relaxation_ratio": 0.01,
   "params": {
@@ -61,8 +109,8 @@
     "write_qty_adjust_info": false
   },
   "path_info": {
-    "calculator_spec_path": "stock/interval/conf/krx/prod_intraday_model_20260114/calculator_spec.json",
-    "model_spec_path": "stock/interval/conf/krx/prod_intraday_model_20260114/model_spec.json",
+    "calculator_spec_path": "stock/interval/conf/krx/prod_intraday_model_20260205/calculator_spec.json",
+    "model_spec_path": "stock/interval/conf/krx/prod_intraday_model_20260205/model_spec.json",
     "sim_objh_config": "",
     "working_dir_root": "$HOME/equity/"
   },
@@ -74,13 +122,13 @@
     "cache_date": "recent",
     "distributed_feed_root": false,
     "exchange": "KRX",
-    "focus_ref_comp": "KRX_SPOT_KRX_SSF",
-    "machine": "kimchi-0.nh.krx-seoul.kr.prod",
+    "focus_ref_comp": "KRX_SPOT_KRX_SSF_NXT_SPOT",
+    "machine": "complete.kr.stock",
     "proto_feed_root": "/remote/iosg/data-2/repository/feed/proto",
     "proto_feed_universe_root": "/remote/iosg/data-2/repository/feed/universe",
     "region": "KRX",
     "universe_str": "TOP2000_5days",
     "use_universe_feed": true
   },
-  "tag": "prod_intraday_model_20260114"
+  "tag": "prod_intraday_model_20260205"
 }
