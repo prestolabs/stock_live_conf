@@ -71,7 +71,7 @@
     "feature_objh_config": "stock/interval/configs/us_20260204_signal_d1_target/feature_objh.json",
     "model_spec_path": "stock/interval/conf/us/prod_model_202602_team_int/model_spec.json",
     "sim_objh_config": "stock/interval/conf/us/prod_model_202602_team_int/sim_objh.json",
-    "team_int_target_position_path": "/remote/iosg/home-13/dhkim/SimplePortfolio/position/us_strategy6_ver1.npz",
+    "team_int_target_position_path": "/remote/iosg/data/etc/portfolio_operations/bot-stock-ops/equity/result/portfolio/US/recent/position/us_live_strategy1_ver1.npz",
     "working_dir_root": "$HOME/equity/"
   },
   "remove_config": true,
